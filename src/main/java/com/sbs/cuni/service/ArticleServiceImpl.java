@@ -35,6 +35,10 @@ public class ArticleServiceImpl implements ArticleService {
 			args.put("leftJoin__articleReply", true);
 			args.put("groupBy__articleId", true);
 		}
+		
+		if (args.containsKey("extra__writer") && (boolean) args.containsKey("extra__writer") == true) {
+			args.put("leftJoin__member", true);
+		}
 
 		int page = 1;
 		if (args.containsKey("page")) {

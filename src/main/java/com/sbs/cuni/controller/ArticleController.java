@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sbs.cuni.dto.Article;
 import com.sbs.cuni.dto.ArticleReply;
 import com.sbs.cuni.dto.Board;
+import com.sbs.cuni.dto.Member;
 import com.sbs.cuni.service.ArticleService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +37,8 @@ public class ArticleController {
 
 		// 게시물 가져올 때 댓글 개수도 가져오도록
 		param.put("extra__repliesCount", true);
-
+		param.put("extra__writer", true);
+		
 		if (param.containsKey("page") == false) {
 			param.put("page", "1");
 		}
@@ -80,12 +82,12 @@ public class ArticleController {
 	}
 
 	@RequestMapping("/article/add")
-	public String showAdd(long boardId, Model model) {
+	public String showAdd(long boardId, Model model, HttpServletRequest rq) {
 		Board board = articleService.getBoard(boardId);
-
 		model.addAttribute("board", board);
+		
 
-		return "article/add";
+		return "/article/add";
 	}
 
 	@RequestMapping("/article/doAdd")

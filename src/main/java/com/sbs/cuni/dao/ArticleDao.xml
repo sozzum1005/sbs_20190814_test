@@ -7,10 +7,17 @@
 		<if test="extra__repliesCount == true">
 			, COUNT(DISTINCT AR.id) AS extra__repliesCount
 		</if>
+		<if test="extra__writer == true">
+			, IFNULL(M.name, '-') AS extra__writer 
+		</if>
 		FROM article AS A
 		<if test="leftJoin__articleReply == true">
 			LEFT JOIN articleReply AS AR
 			ON A.id = AR.articleId
+		</if>
+		<if test="leftJoin__member == true">
+			LEFT JOIN `member` AS M
+			ON A.memberId = M.id
 		</if>
 		WHERE 1 = 1
 		<if test="boardId != null and boardId != ''">
@@ -153,6 +160,7 @@
 		<id property="passwd" column="passwd" />
 		<association property="extra" javaType="java.util.HashMap">
 			<result property="repliesCount" column="extra__repliesCount" />
+			<result property="writer" column="extra__writer" />
 		</association>
 	</resultMap>
 
