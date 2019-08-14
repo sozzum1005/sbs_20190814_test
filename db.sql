@@ -52,3 +52,5 @@ CREATE TABLE `member` (
 insert  into `member`(`id`,`regDate`,`loginId`,`loginPw`,`name`,`emailAuthKey`,`emailAuthStatus`,`delStatus`,`email`,`permissionLevel`) values 
 (1,'2019-05-27 22:54:25','user1','user1','홍길동','',1,0,'user1@test.com',1),
 (2,'2019-05-27 22:54:36','user2','user2','홍길순','',1,0,'user2@test.com',0);
+
+commit 확인용
