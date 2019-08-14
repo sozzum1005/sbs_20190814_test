@@ -21,15 +21,31 @@
 		var $tr = $el.closest('tr');
 		$tr.removeClass('edit-mode');
 	}
+
+	var permissionPerson =  ${loginedMember.permissionLevel > 0 ? loginedMember.permissionLevel : 0};
+	
 </script>
 
 <style>
+
+.deletable-item {
+	display: none;
+}
+
+.deletable .deletable-item {
+	display: block;
+}
+
 .editable-item {
 	display: none;
 }
 
 .editable .editable-item {
 	display: block;
+}
+
+.editable a.editable-item, .deletable a.deletable-item {
+	display: inline-block;
 }
 
 .article-replies-list tr .edit-mode-visible {

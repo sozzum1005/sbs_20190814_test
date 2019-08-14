@@ -152,16 +152,19 @@ function Article__drawReply(reply) {
 	var 내용 = $내용.html();
 	
 	var 비고 = `
-	<div class="editable-item">
-		<a class="read-mode-visible" href="javascript:;" onclick='Article__enableReplyEditMode(this)'>수정</a>
-		<a class="btn-delete" href="javascript:;" onclick="Article__doDeleteReply(this);">삭제</a>
+	<div>
+		<a class="editable-item read-mode-visible" href="javascript:;" onclick='Article__enableReplyEditMode(this)'>수정</a>
+		<a class="deletable-item btn-delete" href="javascript:;" onclick="Article__doDeleteReply(this);">삭제</a>
 	</div>
 	`;
 	
 	var editableClass = '';
 	
-	if ( 회원번호 == loginedMemberId ) {
-		editableClass = 'editable';
+	if ( 회원번호 == loginedMemberId) {
+		editableClass = 'editable deletable';
+	}
+	else if (permissionPerson == 1) {
+		editableClass = 'deletable';
 	}
 	
 	var html = `
