@@ -37,6 +37,7 @@ public class ArticleController {
 
 		// 게시물 가져올 때 댓글 개수도 가져오도록
 		param.put("extra__repliesCount", true);
+		// 게시물 작성자도 볼 수 있도록
 		param.put("extra__writer", true);
 		
 		if (param.containsKey("page") == false) {
