@@ -55,7 +55,7 @@ public class ArticleController {
 	@RequestMapping("article/detail")
 	public String showDetail(@RequestParam(value = "id", defaultValue = "0") int id, Model model, long boardId) {
 		Board board = articleService.getBoard(boardId);
-
+		
 		model.addAttribute("board", board);
 
 		if (id == 0) {
@@ -181,11 +181,27 @@ public class ArticleController {
 	@RequestMapping("/article/doDelete")
 	public String doDelete(Model model, @RequestParam Map<String, Object> param, HttpSession session, long id, long boardId) {
 		param.put("id", id);
+		
+		long loginedMemberId = (long)session.getAttribute("loginedMemberId");
 
+		Article article = articleService.getOne(param);
+		
+		String msg = "";
+		String resultCode = "";
+		
+		if(loginedMemberId != article.getMemberId()) {
+			msg = "권한이 없습니다!";
+			
+			model.addAttribute("alertMsg", msg);
+			model.addAttribute("historyBack", true);
+			
+			return "common/redirect";
+		}
+		
 		Map<String, Object> deleteRs = articleService.delete(param);
 
-		String msg = (String) deleteRs.get("msg");
-		String resultCode = (String) deleteRs.get("resultCode");
+		msg = (String) deleteRs.get("msg");
+		resultCode = (String) deleteRs.get("resultCode");
 
 		if (resultCode.startsWith("S-")) {
 			String redirectUrl = "/article/list?boardId=" + boardId;
