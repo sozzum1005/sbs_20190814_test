@@ -45,7 +45,7 @@ class TempKey {
 	private int length;
 
 	public TempKey() {
-		length = 30;
+		length = 10;
 	}
 
 	public String getKey() {
